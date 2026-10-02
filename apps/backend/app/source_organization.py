@@ -15,7 +15,7 @@ class SourceOrganizationInterrupted(Exception):
 
 
 def _source_lines(document: Document) -> list[dict]:
-    lines = []
+    lines: list[dict] = []
     for page in document.raw_pages:
         visual = [group for group in document.visual_groups if group.page == page.page]
         if visual:
@@ -140,11 +140,11 @@ async def organize_source(raw: Document, provider, *, merge_wrapped: bool = Fals
                 # Rebuild them from the original line sequence, splitting interleaved
                 # sections so that no source text is reordered or lost.
                 current_section = None
-                current_lines = []
+                current_lines: list[dict] = []
                 for line in batch:
                     section = section_by_id.get(line["id"])
                     if section != current_section or line["visual_kind"] == "frame":
-                        if current_lines:
+                        if current_lines and current_section is not None:
                             _, title, kind, tags, step_label = current_section
                             labels = list(dict.fromkeys(
                                 (["枠"] if current_lines[0]["visual_kind"] == "frame" else [])
@@ -155,13 +155,13 @@ async def organize_source(raw: Document, provider, *, merge_wrapped: bool = Fals
                         current_section = section
                     if section is not None:
                         current_lines.append(line)
-                    if line["visual_kind"] == "frame":
+                    if line["visual_kind"] == "frame" and current_section is not None:
                         _, title, kind, tags, step_label = current_section
                         labels = list(dict.fromkeys(["枠"] + [tag.strip()[:40] for tag in tags if tag.strip()]))
                         _append_group(organized, current_lines, title, kind, labels, step_label)
                         current_lines = []
                         current_section = None
-                if current_lines:
+                if current_lines and current_section is not None:
                     _, title, kind, tags, step_label = current_section
                     labels = list(dict.fromkeys([tag.strip()[:40] for tag in tags if tag.strip()]))
                     _append_group(organized, current_lines, title, kind, labels, step_label)

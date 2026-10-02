@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { answerIntro } from "./intro";
+import { openManualCard } from "./manuals";
 
 test("detailed check exercises memory delay, sequence cards and every domain", async ({
   page,
@@ -88,7 +89,7 @@ test("simulated A and B profiles render different pagination and furigana", asyn
   await page.goto("/login");
   await page.getByLabel("ユーザー名", { exact: true }).fill("assessment-b");
   await page.getByRole("button", { name: "ログイン", exact: true }).click();
-  await page.locator(".manual-card").first().click();
+  await openManualCard(page);
   await expect(page.locator(".instruction")).toHaveCount(3);
   await expect(page.locator("ruby")).toHaveCount(0);
   await page.getByRole("button", { name: "次へ", exact: true }).click();
@@ -96,7 +97,7 @@ test("simulated A and B profiles render different pagination and furigana", asyn
   await page.getByRole("button", { name: "ログアウト", exact: true }).click();
   await page.getByLabel("ユーザー名", { exact: true }).fill("assessment-a");
   await page.getByRole("button", { name: "ログイン", exact: true }).click();
-  await page.locator(".manual-card").first().click();
+  await openManualCard(page);
   await expect(page.locator(".instruction")).toHaveCount(1);
   await expect(page.locator("ruby").first()).toBeVisible();
 });

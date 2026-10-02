@@ -70,7 +70,7 @@ def outline_fallback_plan(document: Document, groups: list[dict]) -> dict:
             "title": heading[:160], "category_name": category,
             "source_group_ids": [group["id"]], "image_ids": [],
         })
-    introduction = []
+    introduction: list[str] = []
     while sections and sections[0]["title"] in {"表紙", "初めに", "はじめに", "もくじ", "目次"}:
         introduction.extend(sections.pop(0)["source_group_ids"])
     if introduction:

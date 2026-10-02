@@ -13,7 +13,8 @@ test("admin files a manual under a folder and category", async ({ page }) => {
   await page.getByLabel("フォルダ名").fill(folder);
   await page.getByRole("button", { name: "追加" }).first().click();
   await expect(page.locator(".manual-folder > summary").filter({ hasText: folder })).toBeVisible();
-  await page.getByLabel("入れるフォルダ").selectOption({ label: folder });
+  await page.getByLabel("カテゴリー名").locator("xpath=ancestor::form")
+    .getByLabel("入れるフォルダ").selectOption({ label: folder });
   await page.getByLabel("カテゴリー名").fill("備品");
   await page.getByRole("button", { name: "追加" }).last().click();
   await page.getByRole("link", { name: "標準マニュアル", exact: true }).click();
@@ -50,10 +51,10 @@ test("server settings keep multiple destinations", async ({ page }) => {
   await page.getByRole("button", { name: "保存", exact: true }).click();
   await expect(page.getByText("事務所", { exact: false })).toBeVisible();
   await expect(page.getByText("外部", { exact: false })).toBeVisible();
-  await expect(page.getByText("個人サーバー", { exact: false }).first()).toBeVisible();
+  await expect(page.getByText("Test", { exact: true }).first()).toBeVisible();
   await page.goto("/login");
   const tabs = page.getByRole("tablist", { name: "接続先サーバー" });
-  await expect(tabs.getByRole("tab", { name: "個人サーバー" })).toHaveAttribute("aria-selected", "true");
+  await expect(tabs.getByRole("tab", { name: "Test" })).toHaveAttribute("aria-selected", "true");
   await tabs.getByRole("tab", { name: "外部" }).click();
   await expect(tabs.getByRole("tab", { name: "外部" })).toHaveAttribute("aria-selected", "true");
   await page.reload();

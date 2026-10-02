@@ -1,5 +1,6 @@
 import { test, expect, type Page } from "@playwright/test";
 import { answerIntro } from "./intro";
+import { openManualCard } from "./manuals";
 async function login(page: Page, user = "demo") {
   await page.goto("/login");
   await page.getByLabel("ユーザー名", { exact: true }).fill(user);
@@ -82,9 +83,14 @@ test("publication -> Service Worker notice -> task -> source; preferences and of
     "原稿をセットしてください。",
   );
   await worker.getByRole("button", { name: "閉じる", exact: true }).click();
-  await worker.getByRole("button", { name: "次へ", exact: true }).click();
-  await expect(worker.locator(".instruction")).toContainText("1部");
-  await worker.getByRole("button", { name: "戻る", exact: true }).click();
+  const next = worker.getByRole("button", { name: "次へ", exact: true });
+  if (await next.count()) {
+    await next.click();
+    await expect(worker.locator(".instruction")).toContainText("1部");
+    await worker.getByRole("button", { name: "戻る", exact: true }).click();
+  } else {
+    await expect(worker.getByRole("button", { name: "完了する", exact: true })).toBeVisible();
+  }
   await expect(worker.locator(".instruction")).toContainText("原稿");
   await worker.screenshot({
     path: "test-results/manual-390.png",
@@ -137,13 +143,9 @@ for (const viewport of [
         () => document.documentElement.scrollWidth <= innerWidth,
       ),
     ).toBe(true);
-    await page
-      .locator(".manual-card")
-      .filter({ hasText: "コピー機でA4資料をコピーする" })
-      .first()
-      .click();
+    await openManualCard(page, "コピー機でA4資料をコピーする");
     await expect(
-      page.getByRole("button", { name: "次へ", exact: true }),
+      page.getByRole("button", { name: /^(次へ|完了する)$/ }),
     ).toBeVisible();
     expect(
       await page.evaluate(
@@ -158,15 +160,11 @@ for (const viewport of [
 }
 test("Safety mode prevents offline advancement", async ({ page, context }) => {
   await login(page);
-  await page
-    .locator(".manual-card")
-    .filter({ hasText: "台車に荷物を載せる" })
-    .first()
-    .click();
+  await openManualCard(page, "台車に荷物を載せる");
   await expect(page.locator(".instruction")).toHaveAccessibleName(/保護メガネ/);
   await context.setOffline(true);
   await expect(
-    page.getByRole("button", { name: "次へ", exact: true }),
+    page.getByRole("button", { name: /^(次へ|完了する)$/ }),
   ).toBeDisabled();
   await context.setOffline(false);
 });

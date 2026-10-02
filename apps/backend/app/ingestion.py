@@ -230,7 +230,10 @@ def pdf_sections(reader: PdfReader) -> list[SourceSection]:
                 visit(item)
                 continue
             try:
-                page = reader.get_destination_page_number(item) + 1
+                destination_page = reader.get_destination_page_number(item)
+                if destination_page is None:
+                    continue
+                page = destination_page + 1
                 name = str(item.title).strip()
             except (AttributeError, KeyError, ValueError):
                 continue

@@ -730,7 +730,7 @@ def bulk_delete_manuals(body: BulkDeleteRequest, user: dict = Depends(admin)):
         candidates, generation_count = delete_manual_collection(db, sorted(manual_ids))
         for category_id in category_ids:
             db.execute("DELETE FROM categories WHERE id=?", (category_id,))
-        for folder_id in sorted(descendants, key=descendants.get, reverse=True):
+        for folder_id in sorted(descendants, key=lambda item: descendants[item], reverse=True):
             db.execute("DELETE FROM folders WHERE id=?", (folder_id,))
         audit(db, user["id"], "bulk_deleted", "manuals",
               {"manual_count": len(manual_ids), "folder_count": len(descendants),

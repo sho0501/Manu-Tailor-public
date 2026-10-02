@@ -1,0 +1,72 @@
+name: iOS build
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  workflow_call:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: macos-latest
+    env:
+      APPLE_BUNDLE_ID: ${{ secrets.APPLE_BUNDLE_ID || 'jp.manutailor.app' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - run: xcodebuild -version
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+        env:
+          VITE_API_BASE_URL: ${{ vars.API_BASE_URL || 'http://10.12.24.147:8000' }}
+      - run: pnpm --filter @manu/client exec cap add ios
+      - run: node scripts/configure-native.mjs ios
+      - run: pnpm --filter @manu/client exec cap sync ios
+      - name: Simulator build without signing
+        run: xcodebuild -project apps/client/ios/App/App.xcodeproj -scheme App -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -derivedDataPath output/ios-simulator CODE_SIGNING_ALLOWED=NO build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Manu-Tailor-ios-simulator
+          path: output/ios-simulator/Build/Products/Debug-iphonesimulator/App.app
+          if-no-files-found: error
+      - name: Build unsigned iPhone app for sideloading
+        run: |
+          xcodebuild -project apps/client/ios/App/App.xcodeproj -scheme App -configuration Release -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath output/ios-device CODE_SIGNING_ALLOWED=NO build
+          app=output/ios-device/Build/Products/Release-iphoneos/App.app
+          test -f "$app/Info.plist"
+          lipo -info "$app/App"
+          mkdir -p output/ios-unsigned/Payload
+          cp -R "$app" output/ios-unsigned/Payload/App.app
+          (cd output/ios-unsigned && zip -qry Manu-Tailor-unsigned.ipa Payload)
+          unzip -t output/ios-unsigned/Manu-Tailor-unsigned.ipa
+          echo 'Unsigned iPhone IPA is available. A sideloading tool must sign it with your Apple ID or certificate before installation.' >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Manu-Tailor-ios-unsigned-ipa
+          path: output/ios-unsigned/Manu-Tailor-unsigned.ipa
+          if-no-files-found: error
+      - name: Archive and export signed IPA
+        id: signing
+        env:
+          APPLE_CERTIFICATE_BASE64: ${{ secrets.APPLE_CERTIFICATE_BASE64 }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          APPLE_PROVISION_PROFILE_BASE64: ${{ secrets.APPLE_PROVISION_PROFILE_BASE64 }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          APPLE_EXPORT_METHOD: ${{ vars.APPLE_EXPORT_METHOD || 'release-testing' }}
+        run: bash scripts/build-ios-signed.sh
+      - uses: actions/upload-artifact@v4
+        if: steps.signing.outputs.signed == 'true'
+        with:
+          name: Manu-Tailor-ios.ipa
+          path: output/ios-export/*.ipa
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: steps.signing.outputs.signed != 'true'
+        with:
+          name: Manu-Tailor-ios-signing-required
+          path: output/ios-signing-required.txt
+          if-no-files-found: error

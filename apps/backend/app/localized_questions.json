@@ -1,0 +1,570 @@
+{
+  "en": {
+    "instruction": {
+      "prompt": "The instruction says “Press the red button.” Which button is it?",
+      "choices": [
+        "red button",
+        "blue button",
+        "white button"
+      ]
+    },
+    "negation": {
+      "prompt": "A virtual instruction says “Do not turn off the power.” Which option matches the instruction?",
+      "choices": [
+        "do not turn off the power",
+        "turn off the power"
+      ]
+    },
+    "condition": {
+      "prompt": "A virtual instruction says “Do not press the button until the lamp lights up.” When can you press it?",
+      "choices": [
+        "after the lamp lights up",
+        "before the lamp lights up"
+      ]
+    },
+    "sequence": {
+      "prompt": "Arrange the cards in the order of the instructions: 1) Open the box 2) Take out the contents 3) Put away the box",
+      "choices": [
+        "Take out the contents",
+        "Put away the box",
+        "Open the box"
+      ]
+    },
+    "sequence-before": {
+      "prompt": "You take out the contents before putting away the box. Which action do you do first?",
+      "choices": [
+        "Take out the contents",
+        "Put away the box"
+      ]
+    },
+    "number": {
+      "prompt": "The instruction says to prepare 12 sheets of paper. How many sheets?",
+      "choices": [
+        "12 sheets",
+        "21 sheets",
+        "2 sheets"
+      ]
+    },
+    "unit": {
+      "prompt": "1 kg equals 1000 g. Which weight is the same as 2 kg?",
+      "choices": [
+        "2000 g",
+        "200 g",
+        "20 g"
+      ]
+    },
+    "time": {
+      "prompt": "You wait 10 minutes starting at 10 o’clock. What time does it end?",
+      "choices": [
+        "10:10",
+        "10:01",
+        "11:00"
+      ]
+    },
+    "icon": {
+      "prompt": "🔊 is the symbol for sound. Which symbol indicates sound?",
+      "choices": [
+        "🔊",
+        "📄",
+        "📦"
+      ]
+    },
+    "density-long": {
+      "prompt": "After opening the box and taking out the contents, you put away the box and then wipe the desk. What is done last?",
+      "choices": [
+        "wipe the desk",
+        "open the box",
+        "take out the contents"
+      ]
+    },
+    "density-short": {
+      "prompt": "1. Open the box.\n2. Take out the contents.\n3. Put away the box.\n4. Wipe the desk. What is done last?",
+      "choices": [
+        "wipe the desk",
+        "open the box",
+        "take out the contents"
+      ]
+    },
+    "visual-text": {
+      "prompt": "The instruction says to place the blue box on the right side of the desk and the red box on the left side. Where is the blue box?",
+      "choices": [
+        "right side",
+        "left side"
+      ]
+    },
+    "visual-mixed": {
+      "prompt": "The blue box is on the right side. Please also look at the diagram. Where is the blue box?",
+      "choices": [
+        "right side",
+        "left side"
+      ]
+    },
+    "visual-visual": {
+      "prompt": "Look at the diagram. Where is the blue box?",
+      "choices": [
+        "right side",
+        "left side"
+      ]
+    },
+    "memory-plain": {
+      "prompt": "Take the blue box and place it on the right side of the desk.",
+      "choices": [
+        "right side of the desk",
+        "left side of the desk",
+        "inside the shelf"
+      ],
+      "recall": "Where do you place the box?"
+    },
+    "memory-split": {
+      "prompt": "1. Take the blue box.\n2. Put it on the right side of the desk.",
+      "choices": [
+        "right side of the desk",
+        "left side of the desk",
+        "inside the shelf"
+      ],
+      "recall": "Where do you place the box?"
+    },
+    "warning-plain": {
+      "prompt": "You open the box. Note: Please keep the cards inside. You put away the box. What do you keep?",
+      "choices": [
+        "cards",
+        "box",
+        "keep neither"
+      ]
+    },
+    "warning-highlight": {
+      "prompt": "You open the box. Note: Please keep the cards inside. You put away the box. What do you keep?",
+      "choices": [
+        "cards",
+        "box",
+        "keep neither"
+      ]
+    }
+  },
+  "ja-easy": {
+    "instruction": {
+      "prompt": "『あかいぼたんをおす』というせつめいです。どのぼたんですか？",
+      "choices": [
+        "あかいぼたん",
+        "あおいぼたん",
+        "しろいぼたん"
+      ]
+    },
+    "negation": {
+      "prompt": "かそうのせつめい『でんげんをきらないでください』。せつめいとあうのは？",
+      "choices": [
+        "でんげんをきらない",
+        "でんげんをきる"
+      ]
+    },
+    "condition": {
+      "prompt": "かそうのせつめい『らんぷがつくまでぼたんをおさない』。おせるのは？",
+      "choices": [
+        "らんぷがついたあと",
+        "らんぷがつくまえ"
+      ]
+    },
+    "sequence": {
+      "prompt": "せつめいのじゅんにかーどをならべてください。①はこをあける ②なかみをだす ③はこをかたづける",
+      "choices": [
+        "なかみをだす",
+        "はこをかたづける",
+        "はこをあける"
+      ]
+    },
+    "sequence-before": {
+      "prompt": "はこをかたづけるまえになかみをだします。さきにするのは？",
+      "choices": [
+        "なかみをだす",
+        "はこをかたづける"
+      ]
+    },
+    "number": {
+      "prompt": "かみを12まいよういするせつめいです。なんまいですか？",
+      "choices": [
+        "12まい",
+        "21まい",
+        "2まい"
+      ]
+    },
+    "unit": {
+      "prompt": "1kgは1000gです。2kgとおなじおもさは？",
+      "choices": [
+        "2000g",
+        "200g",
+        "20g"
+      ]
+    },
+    "time": {
+      "prompt": "10じから10ふんまちます。おわるじこくは？",
+      "choices": [
+        "10じ10ふん",
+        "10じ01ふん",
+        "11じ"
+      ]
+    },
+    "icon": {
+      "prompt": "🔊 はおとがでるしるしです。おとのしるしは？",
+      "choices": [
+        "🔊",
+        "📄",
+        "📦"
+      ]
+    },
+    "density-long": {
+      "prompt": "はこをあけてなかみをだしたあと、はこをかたづけてからつくえをふきます。さいごにするのは？",
+      "choices": [
+        "つくえをふく",
+        "はこをあける",
+        "なかみをだす"
+      ]
+    },
+    "density-short": {
+      "prompt": "1. はこをあける。\n2. なかみをだす。\n3. はこをかたづける。\n4. つくえをふく。さいごにするのは？",
+      "choices": [
+        "つくえをふく",
+        "はこをあける",
+        "なかみをだす"
+      ]
+    },
+    "visual-text": {
+      "prompt": "あおいはこはつくえのみぎがわ、あかいはこはひだりがわにおくせつめいです。あおいはこはどちら？",
+      "choices": [
+        "みぎがわ",
+        "ひだりがわ"
+      ]
+    },
+    "visual-mixed": {
+      "prompt": "あおいはこはみぎがわです。ずもみてください。あおいはこはどちら？",
+      "choices": [
+        "みぎがわ",
+        "ひだりがわ"
+      ]
+    },
+    "visual-visual": {
+      "prompt": "ずをみてください。あおいはこはどちら？",
+      "choices": [
+        "みぎがわ",
+        "ひだりがわ"
+      ]
+    },
+    "memory-plain": {
+      "prompt": "あおいはこをとり、つくえのみぎがわにおく。",
+      "choices": [
+        "つくえのみぎがわ",
+        "つくえのひだりがわ",
+        "たなのなか"
+      ],
+      "recall": "はこをどこにおきますか？"
+    },
+    "memory-split": {
+      "prompt": "1. あおいはこをとる。\n2. つくえのみぎがわにおく。",
+      "choices": [
+        "つくえのみぎがわ",
+        "つくえのひだりがわ",
+        "たなのなか"
+      ],
+      "recall": "はこをどこにおきますか？"
+    },
+    "warning-plain": {
+      "prompt": "はこをあけます。ちゅうい：なかのかーどをのこしてください。はこをかたづけます。のこすものは？",
+      "choices": [
+        "かーど",
+        "はこ",
+        "どちらものこさない"
+      ]
+    },
+    "warning-highlight": {
+      "prompt": "はこをあけます。ちゅうい：なかのかーどをのこしてください。はこをかたづけます。のこすものは？",
+      "choices": [
+        "かーど",
+        "はこ",
+        "どちらものこさない"
+      ]
+    }
+  },
+  "zh": {
+    "instruction": {
+      "prompt": "说明是“按下红色按钮”。是哪一个按钮？",
+      "choices": [
+        "红色按钮",
+        "蓝色按钮",
+        "白色按钮"
+      ]
+    },
+    "negation": {
+      "prompt": "虚拟说明‘请不要关闭电源’。符合说明的是？",
+      "choices": [
+        "不要关闭电源",
+        "关闭电源"
+      ]
+    },
+    "condition": {
+      "prompt": "虚拟说明‘在灯亮之前不要按按钮’。可以按的是？",
+      "choices": [
+        "灯亮之后",
+        "灯亮之前"
+      ]
+    },
+    "sequence": {
+      "prompt": "请按说明顺序排列卡片。①打开箱子 ②取出内容物 ③收拾箱子",
+      "choices": [
+        "取出内容物",
+        "收拾箱子",
+        "打开箱子"
+      ]
+    },
+    "sequence-before": {
+      "prompt": "在收拾箱子之前先取出内容物。先做的是？",
+      "choices": [
+        "取出内容物",
+        "收拾箱子"
+      ]
+    },
+    "number": {
+      "prompt": "说明是准备12张纸。是多少张？",
+      "choices": [
+        "12张",
+        "21张",
+        "2张"
+      ]
+    },
+    "unit": {
+      "prompt": "1千克等于1000克。与2千克相同的重量是？",
+      "choices": [
+        "2000克",
+        "200克",
+        "20克"
+      ]
+    },
+    "time": {
+      "prompt": "从10点开始等待10分钟。结束时间是？",
+      "choices": [
+        "10点10分",
+        "10点01分",
+        "11点"
+      ]
+    },
+    "icon": {
+      "prompt": "🔊 是表示有声音的标记。声音的标记是？",
+      "choices": [
+        "🔊",
+        "📄",
+        "📦"
+      ]
+    },
+    "density-long": {
+      "prompt": "打开箱子并取出内容物后，收拾箱子，然后擦拭桌子。最后做的是？",
+      "choices": [
+        "擦拭桌子",
+        "打开箱子",
+        "取出内容物"
+      ]
+    },
+    "density-short": {
+      "prompt": "1. 打开箱子。\n2. 取出内容物。\n3. 收拾箱子。\n4. 擦拭桌子。最后做的是？",
+      "choices": [
+        "擦拭桌子",
+        "打开箱子",
+        "取出内容物"
+      ]
+    },
+    "visual-text": {
+      "prompt": "说明是把蓝色箱子放在桌子右侧，红色箱子放在左侧。蓝色箱子在哪边？",
+      "choices": [
+        "右侧",
+        "左侧"
+      ]
+    },
+    "visual-mixed": {
+      "prompt": "蓝色箱子在右侧。请 also 看图。蓝色箱子在哪边？",
+      "choices": [
+        "右侧",
+        "左侧"
+      ]
+    },
+    "visual-visual": {
+      "prompt": "请看图。蓝色箱子在哪边？",
+      "choices": [
+        "右侧",
+        "左侧"
+      ]
+    },
+    "memory-plain": {
+      "prompt": "取出蓝色箱子，放在桌子右侧。",
+      "choices": [
+        "桌子右侧",
+        "桌子左侧",
+        "架子里"
+      ],
+      "recall": "箱子放在哪里？"
+    },
+    "memory-split": {
+      "prompt": "1. 取出蓝色箱子。\n2. 放在桌子右侧。",
+      "choices": [
+        "桌子右侧",
+        "桌子左侧",
+        "架子里"
+      ],
+      "recall": "箱子放在哪里？"
+    },
+    "warning-plain": {
+      "prompt": "打开箱子。注意：请保留里面的卡片。收拾箱子。保留的东西是？",
+      "choices": [
+        "卡片",
+        "箱子",
+        "都不保留"
+      ]
+    },
+    "warning-highlight": {
+      "prompt": "打开箱子。注意：请保留里面的卡片。收拾箱子。保留的东西是？",
+      "choices": [
+        "卡片",
+        "箱子",
+        "都不保留"
+      ]
+    }
+  },
+  "vi": {
+    "instruction": {
+      "prompt": "Đây là mô tả “Nhấn nút đỏ”. Nút nào?",
+      "choices": [
+        "Nút đỏ",
+        "Nút xanh",
+        "Nút trắng"
+      ]
+    },
+    "negation": {
+      "prompt": "Mô tả ảo “Vui lòng không tắt nguồn”. Điều nào phù hợp với mô tả?",
+      "choices": [
+        "Không tắt nguồn",
+        "Tắt nguồn"
+      ]
+    },
+    "condition": {
+      "prompt": "Mô tả ảo “Không nhấn nút cho đến khi đèn bật”. Khi nào có thể nhấn?",
+      "choices": [
+        "Sau khi đèn bật",
+        "Trước khi đèn bật"
+      ]
+    },
+    "sequence": {
+      "prompt": "Hãy sắp xếp các thẻ theo thứ tự mô tả. ① Mở hộp ② Lấy ra nội dung ③ Dọn dẹp hộp",
+      "choices": [
+        "Lấy ra nội dung",
+        "Dọn dẹp hộp",
+        "Mở hộp"
+      ]
+    },
+    "sequence-before": {
+      "prompt": "Trước khi dọn dẹp hộp, chúng ta sẽ lấy ra nội dung. Điều gì làm trước?",
+      "choices": [
+        "Lấy ra nội dung",
+        "Dọn dẹp hộp"
+      ]
+    },
+    "number": {
+      "prompt": "Đây là mô tả chuẩn bị 12 tờ giấy. Bao nhiêu tờ?",
+      "choices": [
+        "12 tờ",
+        "21 tờ",
+        "2 tờ"
+      ]
+    },
+    "unit": {
+      "prompt": "1kg bằng 1000g. Trọng lượng tương đương với 2kg là?",
+      "choices": [
+        "2000g",
+        "200g",
+        "20g"
+      ]
+    },
+    "time": {
+      "prompt": "Bắt đầu từ 10 giờ, chờ 10 phút. Thời gian kết thúc là?",
+      "choices": [
+        "10 giờ 10 phút",
+        "10 giờ 01 phút",
+        "11 giờ"
+      ]
+    },
+    "icon": {
+      "prompt": "🔊 là biểu tượng âm thanh. Biểu tượng âm thanh là?",
+      "choices": [
+        "🔊",
+        "📄",
+        "📦"
+      ]
+    },
+    "density-long": {
+      "prompt": "Sau khi mở hộp và lấy ra nội dung, rồi dọn dẹp hộp, cuối cùng lau bàn. Điều gì làm cuối cùng?",
+      "choices": [
+        "Lau bàn",
+        "Mở hộp",
+        "Lấy ra nội dung"
+      ]
+    },
+    "density-short": {
+      "prompt": "1. Mở hộp.\n2. Lấy ra nội dung.\n3. Dọn dẹp hộp.\n4. Lau bàn. Điều gì làm cuối cùng?",
+      "choices": [
+        "Lau bàn",
+        "Mở hộp",
+        "Lấy ra nội dung"
+      ]
+    },
+    "visual-text": {
+      "prompt": "Mô tả đặt hộp xanh ở bên phải bàn, hộp đỏ ở bên trái. Hộp xanh ở đâu?",
+      "choices": [
+        "Bên phải",
+        "Bên trái"
+      ]
+    },
+    "visual-mixed": {
+      "prompt": "Hộp xanh ở bên phải. Vui lòng xem hình. Hộp xanh ở đâu?",
+      "choices": [
+        "Bên phải",
+        "Bên trái"
+      ]
+    },
+    "visual-visual": {
+      "prompt": "Vui lòng xem hình. Hộp xanh ở đâu?",
+      "choices": [
+        "Bên phải",
+        "Bên trái"
+      ]
+    },
+    "memory-plain": {
+      "prompt": "Lấy hộp xanh và đặt ở bên phải bàn.",
+      "choices": [
+        "Bên phải bàn",
+        "Bên trái bàn",
+        "Trong kệ"
+      ],
+      "recall": "Bạn đặt hộp ở đâu?"
+    },
+    "memory-split": {
+      "prompt": "1. Lấy hộp xanh.\n2. Đặt ở bên phải bàn.",
+      "choices": [
+        "Bên phải bàn",
+        "Bên trái bàn",
+        "Trong kệ"
+      ],
+      "recall": "Bạn đặt hộp ở đâu?"
+    },
+    "warning-plain": {
+      "prompt": "Mở hộp. Lưu ý: Hãy để lại thẻ bên trong. Dọn dẹp hộp. Đồ gì sẽ để lại?",
+      "choices": [
+        "Thẻ",
+        "Hộp",
+        "Không để lại gì cả"
+      ]
+    },
+    "warning-highlight": {
+      "prompt": "Mở hộp. Lưu ý: Hãy để lại thẻ bên trong. Dọn dẹp hộp. Đồ gì sẽ để lại?",
+      "choices": [
+        "Thẻ",
+        "Hộp",
+        "Không để lại gì cả"
+      ]
+    }
+  }
+}

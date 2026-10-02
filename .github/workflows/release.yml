@@ -1,0 +1,31 @@
+name: Release builds
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  web:
+    uses: ./.github/workflows/build-web.yml
+    secrets: inherit
+  android:
+    uses: ./.github/workflows/build-android.yml
+    secrets: inherit
+  ios:
+    uses: ./.github/workflows/build-ios.yml
+    secrets: inherit
+  summary:
+    needs: [web, android, ios]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: Report deliverables accurately
+        run: |
+          find artifacts -maxdepth 2 -type f >> "$GITHUB_STEP_SUMMARY"
+          if [ -d artifacts/Manu-Tailor-ios-signing-required ]; then
+            echo '::error::Installable IPA was not generated: Apple signing credentials are missing. Web, Android and iOS Simulator artifacts are available.'
+            exit 1
+          fi

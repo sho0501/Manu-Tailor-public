@@ -51,7 +51,7 @@ test("server settings keep multiple destinations", async ({ page }) => {
   await page.getByRole("button", { name: "保存", exact: true }).click();
   await expect(page.getByText("事務所", { exact: false })).toBeVisible();
   await expect(page.getByText("外部", { exact: false })).toBeVisible();
-  await expect(page.getByText("Test", { exact: true }).first()).toBeVisible();
+  await expect(page.locator(".source-row strong").filter({ hasText: /^Test/ })).toBeVisible();
   await page.goto("/login");
   const tabs = page.getByRole("tablist", { name: "接続先サーバー" });
   await expect(tabs.getByRole("tab", { name: "Test" })).toHaveAttribute("aria-selected", "true");

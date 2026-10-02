@@ -93,7 +93,7 @@ test("simulated A and B profiles render different pagination and furigana", asyn
   await expect(page.locator(".instruction")).toHaveCount(3);
   await expect(page.locator("ruby")).toHaveCount(0);
   await page.getByRole("button", { name: "次へ", exact: true }).click();
-  await expect(page.locator(".step-label").first()).toHaveText("STEP 04");
+  await expect(page.locator(".step-progress strong")).toContainText("4 /");
   await page.getByRole("button", { name: "ログアウト", exact: true }).click();
   await page.getByLabel("ユーザー名", { exact: true }).fill("assessment-a");
   await page.getByRole("button", { name: "ログイン", exact: true }).click();
